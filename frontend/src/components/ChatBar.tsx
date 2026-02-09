@@ -135,7 +135,7 @@ const ChatWindow = ({
 
          {/* Body */}
          <div
-            className="h-[250px] overflow-y-auto p-3 bg-[var(--card-bg)] text-[12px] flex flex-col gap-3 transition-colors duration-200"
+            className="max-h-[calc(100vh-200px)] md:h-[250px] overflow-y-auto p-3 bg-[var(--card-bg)] text-[12px] flex flex-col gap-3 transition-colors duration-200"
             ref={scrollRef}
          >
             {messages.length === 0 && !isFriendTyping && (
@@ -318,7 +318,7 @@ const ChatBar: React.FC = () => {
          {isOpen && (
             <div
                ref={chatListRef}
-               className="fixed left-2 w-[200px] bg-[var(--card-bg)] border border-[var(--border-color)] shadow-lg rounded-t-[4px] z-40 max-h-[400px] flex flex-col transition-[bottom,colors] duration-200"
+               className="fixed left-2 w-[min(200px,calc(50vw-16px))] bg-[var(--card-bg)] border border-[var(--border-color)] shadow-lg rounded-t-[4px] z-40 max-h-[min(400px,calc(100vh-120px))] flex flex-col transition-[bottom,colors] duration-200"
                style={{ bottom: `${bottomOffset + 30}px` }}
             >
                <div className="bg-[var(--bg-color)] p-2 border-b border-[var(--border-soft)] flex justify-between items-center transition-colors duration-200">

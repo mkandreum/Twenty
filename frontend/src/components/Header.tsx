@@ -182,7 +182,7 @@ const Header: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 left-0 w-full h-[60px] bg-[#005599] z-50 border-b border-[#003366] shadow-sm">
+    <header className="fixed top-0 left-0 w-full h-[50px] md:h-[60px] bg-[#005599] z-50 border-b border-[#003366] shadow-sm">
       <div className="max-w-[980px] mx-auto h-full flex items-center justify-between px-2">
 
         {/* Left Side: Logo + Navigation */}
@@ -315,7 +315,7 @@ const Header: React.FC = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-                      className="absolute top-[35px] right-0 w-[300px] md:w-[340px] bg-[var(--card-bg)] shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-[var(--border-color)] rounded-[4px] z-[100] text-left overflow-hidden ring-1 ring-black/5 origin-top-right transition-colors duration-200"
+                      className="absolute top-[35px] right-0 w-[min(90vw,340px)] bg-[var(--card-bg)] shadow-[0_8px_32px_rgba(0,0,0,0.2)] border border-[var(--border-color)] rounded-[4px] z-[100] text-left overflow-hidden ring-1 ring-black/5 origin-top-right transition-colors duration-200"
                     >
                       <div className="bg-[#005599] text-white p-3 flex justify-between items-center">
                         <div className="flex items-center gap-2">
@@ -330,7 +330,7 @@ const Header: React.FC = () => {
                         </button>
                       </div>
 
-                      <div className="max-h-[400px] overflow-y-auto no-scrollbar bg-[var(--card-bg)] transition-colors duration-200">
+                      <div className="max-h-[min(400px,calc(100vh-120px))] overflow-y-auto no-scrollbar bg-[var(--card-bg)] transition-colors duration-200">
                         {notifications.length === 0 ? (
                           <div className="p-8 text-center text-gray-500 bg-[var(--card-bg)]">
                             <Bell size={24} className="mx-auto mb-2 opacity-20" />
