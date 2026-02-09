@@ -261,6 +261,15 @@ export const deletePost = async (req: AuthRequest, res: Response): Promise<void>
             return;
         }
 
+        if (post.type === 'photo' && post.image) {
+            await prisma.photo.deleteMany({
+                where: {
+                    userId: req.userId!,
+                    url: post.image
+                }
+            });
+        }
+
         await prisma.post.delete({
             where: { id: postId }
         });

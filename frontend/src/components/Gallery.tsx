@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Tag, X, User as UserIcon, MessageSquare, ThumbsUp, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Tag, Trash2 } from 'lucide-react';
 import api from '../api';
 import { useAuth } from '../contexts/AuthContext';
 import { usePhotoModal } from '../contexts/PhotoModalContext';
-import CommentSection from './CommentSection';
 import { Photo } from '../types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Gallery: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -18,6 +17,7 @@ const Gallery: React.FC = () => {
     const navigate = useNavigate();
 
     const targetUserId = id || user?.id;
+    const isOwner = user?.id && Number(targetUserId) === user.id;
 
     useEffect(() => {
         fetchPhotos();
@@ -43,6 +43,17 @@ const Gallery: React.FC = () => {
     const getPhotoUrl = (url: string) => {
         if (url.startsWith('http')) return url;
         return `${import.meta.env.VITE_API_URL?.replace('/api', '')}${url}`;
+    };
+
+    const handleDeletePhoto = async (photoId: number) => {
+        if (!confirm('¿Seguro que quieres borrar esta foto?')) return;
+        try {
+            await api.delete(`/photos/${photoId}`);
+            setPhotos(prev => prev.filter(p => p.id !== photoId));
+        } catch (e) {
+            console.error(e);
+            alert('No se pudo borrar la foto');
+        }
     };
 
     if (isLoading) return <div className="p-10 text-center opacity-50">Cargando galería...</div>;
@@ -93,13 +104,22 @@ const Gallery: React.FC = () => {
                                     whileHover={{ y: -5, transition: { type: 'spring', stiffness: 300 } }}
                                     className="flex flex-col gap-1 group"
                                 >
-                                    <div className="p-1 bg-[var(--card-bg)] border border-[var(--border-color)] shadow-sm hover:shadow-md transition-all cursor-pointer">
+                                    <div className="relative p-1 bg-[var(--card-bg)] border border-[var(--border-color)] shadow-sm hover:shadow-md transition-all cursor-pointer">
                                         <img
                                             src={getPhotoUrl(photo.url)}
                                             className="w-full aspect-square object-cover"
                                             onClick={() => openPhoto(photo, photos)}
                                             alt={photo.caption || 'Foto'}
                                         />
+                                        {isOwner && (
+                                            <button
+                                                onClick={() => handleDeletePhoto(photo.id)}
+                                                className="absolute top-2 right-2 bg-black/60 text-white p-1 rounded-[3px] opacity-0 group-hover:opacity-100 transition-opacity"
+                                                title="Borrar foto"
+                                            >
+                                                <Trash2 size={14} />
+                                            </button>
+                                        )}
                                     </div>
                                     <div className="flex justify-between items-center px-1">
                                         <div className="text-[9px] text-gray-500">{new Date(photo.createdAt).toLocaleDateString()}</div>
