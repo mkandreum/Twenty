@@ -150,7 +150,7 @@ const PhotoModal: React.FC = () => {
 
                         {/* Friend List Selector */}
                         {showFriendList && (
-                            <div className="absolute bg-[var(--card-bg)] border border-[var(--border-color)] shadow-xl rounded-[2px] w-[min(180px,40vw)] z-50 overflow-hidden max-h-[min(300px,50vh)] overflow-y-auto"
+                            <div className="absolute bg-[var(--card-bg)] border border-[var(--border-color)] shadow-xl rounded-[2px] w-[min(180px,40vw)] z-50 max-h-[min(300px,50vh)] overflow-y-auto"
                                 style={{ left: `${showFriendList.x}%`, top: `${showFriendList.y}%` }}>
                                 <div className="p-2 bg-[var(--bg-color)] border-b border-[var(--border-color)] text-[11px] font-bold text-[var(--text-main)] flex justify-between items-center">
                                     ¿Quién es?
