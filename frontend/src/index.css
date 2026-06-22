@@ -54,6 +54,10 @@ body {
     color: var(--text-main);
     scroll-behavior: smooth;
     transition: background-color 0.2s, color 0.2s;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Better touch scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -76,7 +80,7 @@ body {
 
 @media (max-width: 768px) {
     .main-content-container {
-        padding-top: 60px !important;
+        padding-top: 50px !important;
     }
 }
 
@@ -123,4 +127,32 @@ form input {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #999;
+}
+
+/* Respect user's motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Improve animation performance on mobile */
+.motion-div,
+[class*="motion"],
+[class*="animate"] {
+    will-change: transform, opacity;
+}
+
+/* Reset will-change after animation completes to save memory */
+@media (hover: hover) and (pointer: fine) {
+    .motion-div:not(:hover),
+    [class*="motion"]:not(:hover),
+    [class*="animate"]:not(:hover) {
+        will-change: auto;
+    }
 }

@@ -297,7 +297,7 @@ const Feed: React.FC = () => {
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
                               exit={{ scale: 0 }}
-                              className="absolute top-[-24px] right-0 bg-[var(--card-bg)] border border-[var(--border-color)] text-[var(--text-muted)] text-[11px] w-7 h-7 rounded-full flex items-center justify-center font-bold shadow-sm z-10"
+                              className="absolute top-[-20px] md:top-[-24px] right-0 bg-[var(--card-bg)] border border-[var(--border-color)] text-[var(--text-muted)] text-[10px] md:text-[11px] w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center font-bold shadow-sm z-10"
                            >
                               {140 - statusText.length}
                            </motion.div>

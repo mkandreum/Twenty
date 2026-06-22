@@ -99,6 +99,7 @@ const LeftPanel: React.FC = () => {
       <motion.div
          initial={{ opacity: 0, x: -20 }}
          animate={{ opacity: 1, x: 0 }}
+         transition={{ duration: 0.2, ease: "easeOut" }}
          className="flex flex-col gap-4"
       >
          {/* Profile Summary */}
@@ -107,7 +108,7 @@ const LeftPanel: React.FC = () => {
                <img
                   src={getAvatarUrl(user?.avatar)}
                   alt="Profile"
-                  className="w-[120px] h-[120px] object-cover"
+                  className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover"
                />
             </div>
          </div>
